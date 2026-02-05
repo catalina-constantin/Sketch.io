@@ -1,27 +1,108 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
   margin: 0;
 }
 
-body {
+.parent {
+  display: grid;
+  height: 100dvh;
+  grid-template-columns: inmax(220px, 320px) 1fr;
+  grid-template-areas: "menu main main";
+}
+
+.menu {
+  grid-area: menu;
+}
+
+.main {
+  grid-area: main;
+}
+
+@media (max-widith: 900px) {
+  .parent {
+    grid-template-columns: 1fr;
+    grid-template-areas: "menu" "main";
+  }
+}
+.menu {
+  padding: 0.5rem;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.075);
+}
+
+.link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 80px;
+  margin: 20px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
   overflow: hidden;
-  background: #fff;
+  transform-origin: center left;
+  transition: width 0.2s ease-in;
+  text-decoration: none;
+  color: inherit;
 }
-
-.drawing-board {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  box-sizing: border-box;
-}
-
-#canvas {
+.link:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
   display: block;
+  border-radius: 8px;
   width: 100%;
   height: 100%;
-  image-rendering: pixelated;
-  cursor: crosshair;
+  top: 0;
+  transform: translateX(100%);
+  transition: transform 0.2s ease-in;
+  transform-origin: center right;
+  background-color: #eee;
+}
+.link:hover, .link:focus {
+  outline: 0;
+  width: 130px;
+}
+.link:hover:before,
+.link:hover .link-title, .link:focus:before,
+.link:focus .link-title {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.link-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+  flex-shrink: 0;
+  left: 18px;
+  position: absolute;
+}
+.link-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.link-title {
+  transform: translateX(100%);
+  transition: transform 0.2s ease-in;
+  transform-origin: center right;
+  display: block;
+  text-align: center;
+  text-indent: 28px;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
