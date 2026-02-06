@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -14,6 +15,7 @@ html, body {
   height: 100dvh;
   grid-template-columns: inmax(220px, 320px) 1fr;
   grid-template-areas: "menu main main";
+  overflow: hidden;
 }
 
 .menu {
