@@ -73,12 +73,14 @@ body {
   transform-origin: center right;
   background-color: #eee;
 }
-.link:hover, .link:focus {
+.link:hover,
+.link:focus {
   outline: 0;
   width: 130px;
 }
 .link:hover:before,
-.link:hover .link-title, .link:focus:before,
+.link:hover .link-title,
+.link:focus:before,
 .link:focus .link-title {
   transform: translateX(0);
   opacity: 1;
@@ -111,9 +113,26 @@ body {
   display: flex;
   width: 100%;
   height: 100%;
-  background-image: repeating-linear-gradient(0deg, black, 1px, white 1px, white);
+  background-image: repeating-linear-gradient(
+    0deg,
+    black,
+    1px,
+    white 1px,
+    white
+  );
   background-size: 100% 30px;
   background-color: white;
+}
+
+.colorPick {
+  display: flex;
+  flex-direction: column;
+}
+#element {
+  height: 20px;
+  width: 33px;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 #myCanva {

@@ -95,6 +95,13 @@ document.getElementById("squareBtn")?.addEventListener("click", () => {
   shapes.push(new Square(x, y, randomColor()));
 });
 
+document.getElementById("colorBtn")?.addEventListener("click", () => {
+  const padding = 50;
+  const x = randomRange(padding, canvas.width - padding);
+  const y = randomRange(padding, canvas.height - padding);
+  shapes.push(new Circle(x, y, randomColor()));
+});
+
 document.getElementById("clearBtn")?.addEventListener("click", () => {
   shapes = [];
 });
