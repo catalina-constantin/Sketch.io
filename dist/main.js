@@ -1,4 +1,4 @@
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 import { Circle } from "./shapes/Circle.js";
 import { Triangle } from "./shapes/Triangle.js";
 import { Square } from "./shapes/Square.js";
@@ -77,7 +77,13 @@ window.addEventListener("mouseup", () => {
     const y = randomRange(padding, canvas.height - padding);
     shapes.push(new Square(x, y, randomColor()));
 });
-(_d = document.getElementById("clearBtn")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+(_d = document.getElementById("colorBtn")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+    const padding = 50;
+    const x = randomRange(padding, canvas.width - padding);
+    const y = randomRange(padding, canvas.height - padding);
+    shapes.push(new Circle(x, y, randomColor()));
+});
+(_e = document.getElementById("clearBtn")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
     shapes = [];
 });
 render();
