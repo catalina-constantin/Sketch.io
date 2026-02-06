@@ -118,12 +118,20 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-#colorPicker {
+.colorPick #colorPicker {
   height: 20px;
   width: 33px;
   background-color: transparent;
   border-color: transparent;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(0deg, black, 1px, white 1px, white);
+  background-size: 100% 30px;
+  background-color: white;
 }
 
 #myCanva {
