@@ -7,6 +7,12 @@ const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 const container = document.querySelector(".main") as HTMLElement;
 const ctx = canvas.getContext("2d")!;
 
+const colorPicker = document.getElementById("colorPicker") as HTMLInputElement;
+
+function getSelectedColor(): string {
+  return colorPicker.value;
+}
+
 function resizeCanvas() {
   if (container) {
     const width = container.clientWidth;
@@ -25,14 +31,11 @@ resizeCanvas();
 
 let shapes: Shape[] = [];
 let draggingShape: Shape | null = null;
+let selectedShape: Shape | null = null;
 let offset = { x: 0, y: 0 };
 
 function randomRange(min: number, max: number): number {
   return Math.random() * (max - min) + min;
-}
-
-function randomColor(): string {
-  return `hsl(${Math.random() * 360}, 70%, 50%)`;
 }
 
 function render() {
@@ -47,15 +50,22 @@ canvas.addEventListener("mousedown", (e) => {
   const mouseX = e.clientX - rect.left;
   const mouseY = e.clientY - rect.top;
 
+  let hit = false;
   for (let i = shapes.length - 1; i >= 0; i--) {
     if (shapes[i].isPointInside(mouseX, mouseY)) {
       draggingShape = shapes[i];
+      selectedShape = shapes[i];
+      hit = true;
+
       offset.x = mouseX - draggingShape.x;
       offset.y = mouseY - draggingShape.y;
 
       shapes.push(shapes.splice(i, 1)[0]);
       break;
     }
+  }
+  if(!hit) {
+    selectedShape = null;
   }
 });
 
@@ -74,32 +84,31 @@ window.addEventListener("mouseup", () => {
   draggingShape = null;
 });
 
+colorPicker.addEventListener("input", () => {
+  if (selectedShape) {
+    selectedShape.color = colorPicker.value;
+  }
+});
+
 document.getElementById("circleBtn")?.addEventListener("click", () => {
   const padding = 50;
   const x = randomRange(padding, canvas.width - padding);
   const y = randomRange(padding, canvas.height - padding);
-  shapes.push(new Circle(x, y, randomColor()));
+  shapes.push(new Circle(x, y, getSelectedColor()));
 });
 
 document.getElementById("triangleBtn")?.addEventListener("click", () => {
   const padding = 60;
   const x = randomRange(padding, canvas.width - padding);
   const y = randomRange(padding, canvas.height - padding);
-  shapes.push(new Triangle(x, y, randomColor()));
+  shapes.push(new Triangle(x, y, getSelectedColor()));
 });
 
 document.getElementById("squareBtn")?.addEventListener("click", () => {
   const padding = 60;
   const x = randomRange(padding, canvas.width - padding);
   const y = randomRange(padding, canvas.height - padding);
-  shapes.push(new Square(x, y, randomColor()));
-});
-
-document.getElementById("colorBtn")?.addEventListener("click", () => {
-  const padding = 50;
-  const x = randomRange(padding, canvas.width - padding);
-  const y = randomRange(padding, canvas.height - padding);
-  shapes.push(new Circle(x, y, randomColor()));
+  shapes.push(new Square(x, y, getSelectedColor()));
 });
 
 document.getElementById("clearBtn")?.addEventListener("click", () => {
