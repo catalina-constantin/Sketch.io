@@ -1,6 +1,7 @@
 import { Shape } from "./shapes/Shape.js";
 import { Circle } from "./shapes/Circle.js";
 import { Triangle } from "./shapes/Triangle.js";
+import { Square } from "./shapes/Square.js";
 
 const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 const container = document.querySelector(".main") as HTMLElement;
@@ -36,12 +37,6 @@ function randomColor(): string {
 
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (shapes.length === 0) {
-    ctx.fillStyle = "#ccc";
-    ctx.font = "20px sans-serif";
-    ctx.fillText("Click buttons below to add shapes", 250, 300);
-  }
 
   shapes.forEach((s) => s.draw(ctx));
   requestAnimationFrame(render);
@@ -91,6 +86,13 @@ document.getElementById("triangleBtn")?.addEventListener("click", () => {
   const x = randomRange(padding, canvas.width - padding);
   const y = randomRange(padding, canvas.height - padding);
   shapes.push(new Triangle(x, y, randomColor()));
+});
+
+document.getElementById("squareBtn")?.addEventListener("click", () => {
+  const padding = 60;
+  const x = randomRange(padding, canvas.width - padding);
+  const y = randomRange(padding, canvas.height - padding);
+  shapes.push(new Square(x, y, randomColor()));
 });
 
 document.getElementById("clearBtn")?.addEventListener("click", () => {

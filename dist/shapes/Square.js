@@ -1,23 +1,26 @@
-"use strict";
-// import { BaseShape } from "./Shape.js";
-// export class Square extends BaseShape {
-//   constructor(x: number, y: number, size: number, color: string) {
-//     super(x, y, size, color, "square");
-//   }
-//   drawShape(ctx: CanvasRenderingContext2D, currentSize: number): void {
-//     const half = currentSize / 2;
-//     ctx.beginPath();
-//     ctx.rect(this.x - half, this.y - half, currentSize, currentSize);
-//     ctx.fill();
-//     ctx.stroke();
-//   }
-//   contains(mx: number, my: number): boolean {
-//     const half = this.size / 2;
-//     return (
-//       mx >= this.x - half &&
-//       mx <= this.x + half &&
-//       my >= this.y - half &&
-//       my <= this.y + half
-//     );
-//   }
-// }
+import { Shape } from "./Shape.js";
+export class Square extends Shape {
+    constructor() {
+        super(...arguments);
+        this.size = 70;
+    }
+    draw(ctx) {
+        ctx.beginPath();
+        const half = this.size / 2;
+        const topLeftX = this.x - half;
+        const topLeftY = this.y - half;
+        ctx.rect(topLeftX, topLeftY, this.size, this.size);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.strokeStyle = "rgba(0,0,0,0.2)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+    isPointInside(px, py) {
+        const half = this.size / 2;
+        return (px >= this.x - half &&
+            px <= this.x + half &&
+            py >= this.y - half &&
+            py <= this.y + half);
+    }
+}

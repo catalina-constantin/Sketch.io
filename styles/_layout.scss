@@ -1,12 +1,13 @@
-@use 'variables';
+@use "variables";
 
 *,
 *::before,
-*::after{
+*::after {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -15,16 +16,22 @@ html, body {
   display: grid;
   height: 100dvh;
   grid-template-columns: inmax(220px, 320px) 1fr;
-  grid-template-areas:"menu main main";
+  grid-template-areas: "menu main main";
+  overflow: hidden;
 }
 
-.menu {grid-area: menu;}
-.main {grid-area: main;}
+.menu {
+  grid-area: menu;
+}
+.main {
+  grid-area: main;
+}
 
-@media (max-widith:900px){
-  .parent{
+@media (max-widith: 900px) {
+  .parent {
     grid-template-columns: 1fr;
-    grid-template-areas: "menu"
-                          "main";
+    grid-template-areas:
+      "menu"
+      "main";
   }
 }
