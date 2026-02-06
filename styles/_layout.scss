@@ -15,7 +15,7 @@ body {
 .parent {
   display: grid;
   height: 100dvh;
-  grid-template-columns: inmax(220px, 320px) 1fr;
+  grid-template-columns: inmax(variables.$menu-width-min, variables.$menu-width-max) 1fr;
   grid-template-areas: "menu main main";
   overflow: hidden;
 }
@@ -27,7 +27,7 @@ body {
   grid-area: main;
 }
 
-@media (max-widith: 900px) {
+@media (max-widith: variables.$breakpoint-tablet) {
   .parent {
     grid-template-columns: 1fr;
     grid-template-areas:
